@@ -2,11 +2,12 @@ const mongoose = require("mongoose");
 
 const CipherSchema = new mongoose.Schema(
   {
-    userID: {
+    userId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       required: true,
     },
+    userName: { type: String, maxLength: 40, required: true },
     text: { type: String, maxLength: 140, required: true },
     encryptedText: { type: String, maxLength: 140, required: true },
     solved: { type: Boolean, required: true },
