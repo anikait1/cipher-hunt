@@ -1,50 +1,30 @@
 const router = require("express").Router();
-
-const Cipher = require("./cipher.model");
-const User = require("../user/user.model");
+const auth = require("../../utils/auth");
 
 const cipherController = require("./cipher.controller");
 const guessController = require("../guess/guess.controller");
 
-router.post("/", cipherController.addCipher);
+// middleware to attach cipher to the request object
+router.use("/:id", cipherController.attachCipherToRequest);
+
+router.get("/:id", cipherController.getCipherById);
 router.get("/", cipherController.getCiphers);
+router.post("/", auth.isAuthenicated, cipherController.addCipher);
 
-router.use("/:id", async (req, res, next) => {
-  try {
-    const isCipher = await Cipher.exists({ _id: req.params.id });
-
-    if (isCipher) {
-      next();
-    } else {
-      res.status(404).json({ err: "Cipher Not Found" });
-    }
-  } catch (err) {
-    res.status(422).json({ err: "Invalid Cipher id" });
-  }
-});
-
-router.use("/:id", async (req, res, next) => {
-  try {
-    // validate user (jwt or session)
-    const isUser = await Cipher.exists({ _id: req.user.id });
-
-    if (isUser) {
-      next();
-    } else {
-      res.status(404).json({ err: "User Not Found" });
-    }
-  } catch (err) {
-    res.status(422).json({ err: "Invalid User Id" });
-  }
-});
-
-router.get("/:id", (req, res) => {
-  res.send("something");
-});
-
-router.get("/:id/guesses", (_, res) => {
-  res.send("got you");
-});
-router.post("/:id/guesses");
+router.get("/:id/guess/", guessController.getGuesses);
+router.post(
+  "/:id/guess/",
+  auth.isAuthenicated,
+  guessController.isAuthorOfCipher,
+  guessController.isCipherSolved,
+  guessController.guessExists,
+  guessController.addGuess
+);
+router.patch(
+  "/:id/guess/:guessId",
+  auth.isAuthenicated,
+  guessController.isCipherSolved,
+  guessController.updateGuess
+);
 
 module.exports = router;
