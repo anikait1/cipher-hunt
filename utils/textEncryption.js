@@ -55,7 +55,7 @@ const _mostFrequentCharacters = (text) => {
     .slice(0, 3);
 };
 
-// return an array containing the top three most frequent characters and their encryption mapping(to be used as hints)
+// return an array containing the top three frequent characters and their encryption mapping(to be used as hints)
 const _hintsMapping = (text, encryptionArray) => {
   return _mostFrequentCharacters(text).map((val) => ({
     original: val.character,

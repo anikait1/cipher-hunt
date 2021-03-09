@@ -67,7 +67,7 @@ exports.signin = async (req, res) => {
 
 exports.isAuthenicated = async (req, res, next) => {
   if (!req.session.user?.id) {
-    return res.status(401).json({err: "Unauthorized"});
+    return res.status(401).json({ err: "Unauthorized" });
   }
 
   next();
