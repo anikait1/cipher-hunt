@@ -2,19 +2,20 @@ const mongoose = require("mongoose");
 
 const GuessSchema = mongoose.Schema(
   {
-    cipherID: {
+    cipherId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Cipher",
       required: true,
     },
-    userID: {
+    userId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       required: true,
     },
-    text: { type: String, maxLength: 140 },
+    userName: { type: String, maxLength: 40, required: true },
+    text: { type: String, maxLength: 140, required: true },
     correct: { type: Boolean, required: true },
-    attempts: { type: Number, default: 0 },
+    attempts: { type: Number, default: 1 },
   },
   { timestamps: true }
 );
