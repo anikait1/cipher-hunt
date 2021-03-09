@@ -20,9 +20,6 @@ app.use(
 );
 app.use(express.json());
 
-const cipherRouter = require("./resources/cipher/cipher.route");
-const userRouter = require("./resources/user/user.route");
-
 mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -34,6 +31,11 @@ mongoose.connection.on(
 mongoose.connection.once("open", () => {
   console.log("DB is up");
 });
+
+mongoose.set('debug', { shell: true })
+
+const cipherRouter = require("./resources/cipher/cipher.route");
+const userRouter = require("./resources/user/user.route");
 
 app.use("/ciphers", cipherRouter);
 app.use("/user", userRouter);
