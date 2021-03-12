@@ -15,6 +15,12 @@ exports.addGuess = async (req, res) => {
         : false,
   });
 
+  if (guess.correct) {
+    await Cipher.findByIdAndUpdate(req.params.id, {
+      solved: true,
+    }).exec();
+  }
+
   await guess.save();
   return res.status(200).json(guess);
 };
@@ -70,7 +76,7 @@ exports.updateGuess = async (req, res) => {
     }
 
     const isGuessCorrect =
-      req.cipher.text.localeCompare(guess.text, undefined, {
+      req.cipher.text.localeCompare(req.body.guess.text, undefined, {
         sensitivity: "base",
       }) === 0
         ? true
@@ -89,7 +95,7 @@ exports.updateGuess = async (req, res) => {
     await guess.save();
     return res.status(200).json({ guess });
   } catch (err) {
-    res.status(500).send(JSON.stringify(err));
+    res.status(500).json(err);
   }
 };
 
