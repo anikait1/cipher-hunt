@@ -11,9 +11,9 @@ router.get("/:id", cipherController.getCipherById);
 router.get("/", cipherController.getCiphers);
 router.post("/", auth.isAuthenicated, cipherController.addCipher);
 
-router.get("/:id/guess/", guessController.getGuesses);
+router.get("/:id/guess", guessController.getGuesses);
 router.post(
-  "/:id/guess/",
+  "/:id/guess",
   auth.isAuthenicated,
   guessController.isAuthorOfCipher,
   guessController.isCipherSolved,
