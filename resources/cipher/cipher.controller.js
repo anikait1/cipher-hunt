@@ -13,7 +13,7 @@ exports.getCiphers = async (_req, res) => {
       })
       .lean()
       .exec();
-    
+
     console.log(typeof ciphers[0]._id);
 
     return res.status(200).json(ciphers);
@@ -77,5 +77,14 @@ exports.addCipher = async (req, res) => {
     return res.status(201).json({ id: cipher._id });
   } catch (err) {
     return res.json({ err });
+  }
+};
+
+exports.getUserCiphers = async (req, res) => {
+  try {
+    const ciphers = await Cipher.find({ userId: req.id });
+    return res.status(200).json(ciphers);
+  } catch (err) {
+    res.status(500).json(err);
   }
 };
