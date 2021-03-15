@@ -61,4 +61,8 @@ typings/
 # next.js build output
 .next
 
+# typescript build
 dist
+
+# vs code config
+.vscode
