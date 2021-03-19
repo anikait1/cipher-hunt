@@ -1,9 +1,11 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const session = require("express-session");
+const cors = require("cors");
 require("dotenv").config({ path: "./.local.env" });
 
 const app = express();
+app.use(cors());
 app.use(
   session({
     name: "qid",
@@ -40,6 +42,6 @@ const userRouter = require("./resources/user/user.route");
 app.use("/ciphers", cipherRouter);
 app.use("/user", userRouter);
 
-app.listen(8000, () => {
+app.listen(process.env.PORT || 8000, () => {
   console.log("Server is up");
 });

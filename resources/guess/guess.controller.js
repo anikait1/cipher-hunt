@@ -114,7 +114,6 @@ exports.getGuesses = async (req, res) => {
 
     return res.status(200).json(guesses);
   } catch (err) {
-    console.log(err);
     res.status(500);
   }
 };

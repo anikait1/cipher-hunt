@@ -20,6 +20,7 @@
   "homepage": "https://github.com/anikait1/cipher-hunt#readme",
   "dependencies": {
     "argon2": "^0.27.1",
+    "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-session": "^1.17.1",

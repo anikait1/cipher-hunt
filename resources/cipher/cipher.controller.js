@@ -14,8 +14,6 @@ exports.getCiphers = async (_req, res) => {
       .lean()
       .exec();
 
-    console.log(typeof ciphers[0]._id);
-
     return res.status(200).json(ciphers);
   } catch (err) {
     return res.status(500).json(err);
@@ -49,10 +47,8 @@ exports.attachCipherToRequest = async (req, res, next) => {
     }
 
     req.cipher = cipher;
-    console.log(cipher);
     next();
   } catch (err) {
-    console.log(err);
     res.status(422).json(err);
   }
 };
