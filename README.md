@@ -13,13 +13,13 @@ npm run dev
 Traditional web apps are organized in MVC pattern, while the project is based on the same pattern, the directory structure is little different.
 ```
   ├── resources                                     # Each entity is modeled as a resource
-  │   ├── <resource name>                           # Resources have following files associated with it
-  │       ├── <resource name>.model.js              # Model
-  │       ├── <resource name>.controller.js         # Controller (CRUD operations and middleware)
-  |       ├── <resource name>.route.js              # Routes and middleware configuration for
+  │   ├── <resource name>                               # Resources have following files associated with it
+  │       ├── <resource name>.model.js                      # Model
+  │       ├── <resource name>.controller.js                 # Controller (CRUD operations and middleware)
+  |       ├── <resource name>.route.js                      # Routes and middleware configuration for
   ├── utils                                         # Handful utils such as auth and textEncryption
-  |   ├── auth.js                                   # Authentication related middleware and operations
-  |   ├── textEncryption.js                         # Character shuffling and hints mapping
+  |   ├── auth.js                                       # Authentication related middleware and operations
+  |   ├── textEncryption.js                             # Character shuffling and hints mapping
   ├── index.js                                      # Starting point of the app
 ```
 
